@@ -69,3 +69,10 @@ opportunity, it is the boundary of the string.
 - `split_lines(text)` — return the text split at those indices.
 - `LineBreakIterator(text)` — iterable over the break indices, with `.text`.
 - `LineBreakClass` — enum of the reduced line break classes.
+
+## Design notes
+
+The window stores values eagerly rather than keeping running aggregates. Running
+sums drift with floating point over long streams, and recomputing from a small
+buffer is cheap enough that the drift is not worth the speed.
+
